@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AddTaskScreen extends StatelessWidget {
+  final Function onSubmitText;
+  AddTaskScreen({required this.onSubmitText});
+
   @override
   Widget build(BuildContext context) {
+    late String newTaskTitle;
     return Container(
       color: Color(0XFF757575),
       child: Container(
@@ -40,6 +44,9 @@ class AddTaskScreen extends StatelessWidget {
                   ),
                 ),
                 cursorColor: Colors.lightBlueAccent,
+                onChanged: (value) {
+                  newTaskTitle = value;
+                },
               ),
               SizedBox(
                 height: 20.0,
@@ -49,7 +56,11 @@ class AddTaskScreen extends StatelessWidget {
                   backgroundColor:
                       MaterialStateProperty.all(Colors.lightBlueAccent),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  if (newTaskTitle != null) {
+                    onSubmitText(newTaskTitle);
+                  }
+                },
                 child: Text(
                   'Add',
                   style: TextStyle(
